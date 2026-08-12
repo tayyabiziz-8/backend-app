@@ -66,7 +66,6 @@ export default (
       ],
     }
   );
-
   Order.associate = (models) => {
     if (models.User) {
       Order.belongsTo(models.User, {
@@ -81,6 +80,5 @@ export default (
       });
     }
   };
-
   return Order;
 };

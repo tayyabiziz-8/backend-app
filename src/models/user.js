@@ -57,7 +57,6 @@ export default (
       ],
     }
   );
-
   User.associate = (models) => {
     if (models.UserAuthToken) {
       User.hasMany(models.UserAuthToken, {
@@ -66,6 +65,5 @@ export default (
       });
     }
   };
-
   return User;
 };

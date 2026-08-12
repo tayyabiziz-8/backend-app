@@ -31,7 +31,6 @@ export default (
       updatedAt: "updated_at",
     }
   );
-
   Cart.associate = (models) => {
     if (models.User) {
       Cart.belongsTo(models.User, {
@@ -46,6 +45,5 @@ export default (
       });
     }
   };
-
   return Cart;
 };

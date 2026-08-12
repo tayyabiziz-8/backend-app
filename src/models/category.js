@@ -62,7 +62,6 @@ export default (
       ],
     }
   );
-
   Category.associate = (models) => {
     // Sub-categories / parent (self-referencing)
     Category.hasMany(Category, {
@@ -81,6 +80,5 @@ export default (
       });
     }
   };
-
   return Category;
 };

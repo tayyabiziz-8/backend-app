@@ -3,15 +3,15 @@ require('dotenv').config();
 module.exports = {
   development: {
     username: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASSWORD || "1234",
-    database: process.env.DB_DATABASE || "manyparts",
+    password: process.env.DB_PASSWORD || "admin",
+    database: process.env.DB_DATABASE || "backend-psql",
     host: process.env.DB_HOST || "127.0.0.1",
     dialect: "postgres"
   },
   staging: {
     username: process.env.DB_USER || "postgres",
-    password: process.env.DB_PASSWORD || "password",
-    database: process.env.DB_DATABASE || "manyparts_test",
+    password: process.env.DB_PASSWORD || "admin",
+    database: process.env.DB_DATABASE || "backend-psql",
     host: process.env.DB_HOST || "127.0.0.1",
     dialect: "postgres"
   },

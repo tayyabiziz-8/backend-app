@@ -45,7 +45,6 @@ export default (
       ],
     }
   );
-
   Wishlist.associate = (models) => {
     if (models.User) {
       Wishlist.belongsTo(models.User, {
@@ -60,6 +59,5 @@ export default (
       });
     }
   };
-
   return Wishlist;
 };

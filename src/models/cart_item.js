@@ -50,7 +50,6 @@ export default (
       ],
     }
   );
-
   CartItem.associate = (models) => {
     if (models.Cart) {
       CartItem.belongsTo(models.Cart, {
@@ -65,6 +64,5 @@ export default (
       });
     }
   };
-
   return CartItem;
 };

@@ -58,7 +58,6 @@ export default (
       ],
     }
   );
-
   OrderItem.associate = (models) => {
     if (models.Order) {
       OrderItem.belongsTo(models.Order, {
@@ -73,6 +72,5 @@ export default (
       });
     }
   };
-
   return OrderItem;
 };

@@ -84,7 +84,6 @@ export default (
       ],
     }
   );
-
   Product.associate = (models) => {
     if (models.Category) {
       Product.belongsTo(models.Category, {
@@ -111,6 +110,5 @@ export default (
       });
     }
   };
-
   return Product;
 };
