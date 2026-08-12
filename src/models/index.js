@@ -5,6 +5,13 @@ import { Sequelize } from "sequelize";
 
 import UserFactory from "./user.js";
 import UserAuthTokenFactory from "./user_auth_token.js";
+import CategoryFactory from "./category.js";
+import ProductFactory from "./product.js";
+import CartFactory from "./cart.js";
+import CartItemFactory from "./cart_item.js";
+import WishlistFactory from "./wishlist.js";
+import OrderFactory from "./order.js";
+import OrderItemFactory from "./order_item.js";
 
 /**
  * Single shared Sequelize instance. Exported eagerly so any model file that
@@ -30,10 +37,24 @@ const sequelize = new Sequelize(
  */
 const User = UserFactory(sequelize, Sequelize);
 const UserAuthToken = UserAuthTokenFactory(sequelize, Sequelize);
+const Category = CategoryFactory(sequelize, Sequelize);
+const Product = ProductFactory(sequelize, Sequelize);
+const Cart = CartFactory(sequelize, Sequelize);
+const CartItem = CartItemFactory(sequelize, Sequelize);
+const Wishlist = WishlistFactory(sequelize, Sequelize);
+const Order = OrderFactory(sequelize, Sequelize);
+const OrderItem = OrderItemFactory(sequelize, Sequelize);
 
 const db = {
   User,
   UserAuthToken,
+  Category,
+  Product,
+  Cart,
+  CartItem,
+  Wishlist,
+  Order,
+  OrderItem,
 };
 
 /**
@@ -53,4 +74,11 @@ export {
   Sequelize,
   User,
   UserAuthToken,
+  Category,
+  Product,
+  Cart,
+  CartItem,
+  Wishlist,
+  Order,
+  OrderItem,
 };

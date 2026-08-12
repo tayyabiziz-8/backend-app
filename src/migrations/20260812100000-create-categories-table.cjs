@@ -2,33 +2,43 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Categories", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
+      name: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      lastName: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      email: {
+      slug: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
       },
-      phone: {
+      description: {
+        type: Sequelize.TEXT,
+        allowNull: true,
+      },
+      image: {
         type: Sequelize.STRING,
         allowNull: true,
       },
-      password: {
-        type: Sequelize.STRING,
+      parentId: {
+        type: Sequelize.INTEGER,
         allowNull: true,
+        references: {
+          model: "Categories",
+          key: "id",
+        },
+        onDelete: "CASCADE",
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true,
       },
       created_at: {
         allowNull: false,
@@ -42,14 +52,16 @@ module.exports = {
       },
     });
 
-    // Add indexes
-    await queryInterface.addIndex("Users", ["email"], {
+    await queryInterface.addIndex("Categories", ["slug"], {
       unique: true,
-      name: "users_email_unique",
+      name: "categories_slug_unique",
+    });
+    await queryInterface.addIndex("Categories", ["parentId"], {
+      name: "categories_parent_id_idx",
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("Categories");
   },
 };

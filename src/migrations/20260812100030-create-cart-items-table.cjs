@@ -2,33 +2,35 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("CartItems", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
-        type: Sequelize.STRING,
+      cartId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Carts",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
-      lastName: {
-        type: Sequelize.STRING,
+      productId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Products",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
-      email: {
-        type: Sequelize.STRING,
+      quantity: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-        unique: true,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        defaultValue: 1,
       },
       created_at: {
         allowNull: false,
@@ -42,14 +44,13 @@ module.exports = {
       },
     });
 
-    // Add indexes
-    await queryInterface.addIndex("Users", ["email"], {
+    await queryInterface.addIndex("CartItems", ["cartId", "productId"], {
       unique: true,
-      name: "users_email_unique",
+      name: "cart_items_cart_id_product_id_unique",
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("CartItems");
   },
 };

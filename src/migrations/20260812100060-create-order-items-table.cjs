@@ -2,24 +2,38 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("user_auth_token", {
+    await queryInterface.createTable("OrderItems", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      orderId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: "Users",
+          model: "Orders",
           key: "id",
         },
         onDelete: "CASCADE",
       },
-      token: {
-        type: Sequelize.STRING,
+      productId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: "Products",
+          key: "id",
+        },
+        onDelete: "RESTRICT",
+      },
+      quantity: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      price: {
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: false,
       },
       created_at: {
@@ -33,9 +47,16 @@ module.exports = {
         defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
       },
     });
+
+    await queryInterface.addIndex("OrderItems", ["orderId"], {
+      name: "order_items_order_id_idx",
+    });
+    await queryInterface.addIndex("OrderItems", ["productId"], {
+      name: "order_items_product_id_idx",
+    });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("user_auth_token");
+    await queryInterface.dropTable("OrderItems");
   },
 };

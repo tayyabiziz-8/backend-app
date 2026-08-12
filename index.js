@@ -1,20 +1,19 @@
-import "dotenv/config.js";
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import productsRoute from "./src/routes/products.route.js";
+import productsRouter from "./src/routes/products.route.js";
+
+const PORT = process.env.PORT || 4321;
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json());
 
-app.get("/", (req, res)=>{
-    res.send("Backend is running...");
-})
-
-app.use("/products", productsRoute);
+app.use("/api/products", productsRouter);
 
 app.listen(PORT, (err) => {
-    if (err) {
-        console.error("Error starting the server:", err);
-    } else {
-        console.log(`Backend server is running on PORT ${PORT}`);
-    }
+  if (err) {
+    console.log(`Unable to listen on port ${PORT}: ${err}`);
+  } else {
+    console.log(`App listening on port ${PORT}`);
+  }
 });

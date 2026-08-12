@@ -1,13 +1,12 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "./index.js";
-import User from "./user.js";
 
 export default (
   sequelizeInstance = sequelize,
   DataTypesInstance = DataTypes
 ) => {
-  const UserAuthToken = sequelizeInstance.define(
-    "UserAuthToken",
+  const Cart = sequelizeInstance.define(
+    "Cart",
     {
       id: {
         type: DataTypesInstance.INTEGER,
@@ -17,32 +16,36 @@ export default (
       userId: {
         type: DataTypesInstance.INTEGER,
         allowNull: false,
+        unique: true, // one cart per user
         references: {
-          model: User,
+          model: "Users",
           key: "id",
         },
         onDelete: "CASCADE",
       },
-      token: {
-        type: DataTypesInstance.STRING,
-        allowNull: false,
-      },
     },
     {
-      tableName: "user_auth_token",
+      tableName: "Carts",
       timestamps: true,
       createdAt: "created_at",
       updatedAt: "updated_at",
     }
   );
 
-  UserAuthToken.associate = (models) => {
+  Cart.associate = (models) => {
     if (models.User) {
-      UserAuthToken.belongsTo(models.User, {
+      Cart.belongsTo(models.User, {
         foreignKey: "userId",
         as: "user",
       });
     }
+    if (models.CartItem) {
+      Cart.hasMany(models.CartItem, {
+        foreignKey: "cartId",
+        as: "items",
+      });
+    }
   };
-  return UserAuthToken;
+
+  return Cart;
 };

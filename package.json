@@ -1,5 +1,5 @@
 {
-  "name": "backend-app",
+  "name": "backend-psql",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -16,6 +16,7 @@
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.6.5"
+    "sequelize-cli": "^6.6.5",
+    "nodemon": "^3.1.10"
   }
 }

@@ -2,33 +2,30 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Wishlists", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      firstName: {
-        type: Sequelize.STRING,
+      userId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
-      lastName: {
-        type: Sequelize.STRING,
+      productId: {
+        type: Sequelize.INTEGER,
         allowNull: false,
-      },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      phone: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        references: {
+          model: "Products",
+          key: "id",
+        },
+        onDelete: "CASCADE",
       },
       created_at: {
         allowNull: false,
@@ -42,14 +39,13 @@ module.exports = {
       },
     });
 
-    // Add indexes
-    await queryInterface.addIndex("Users", ["email"], {
+    await queryInterface.addIndex("Wishlists", ["userId", "productId"], {
       unique: true,
-      name: "users_email_unique",
+      name: "wishlists_user_id_product_id_unique",
     });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("Wishlists");
   },
 };

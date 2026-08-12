@@ -1,13 +1,11 @@
 import express from "express";
-import {getProducts} from "../controllers/products.controller.js";
+import { getProducts, getProduct, createProduct, updateProduct } from "../controllers/products.controller.js";
+
 const router = express.Router();
 
-// Sample route for products
 router.get("/", getProducts);
-
-router.get("/:id", (req, res) => {
-    const productId = req.params.id;
-    res.send(`Product details for ID: ${productId}`);
-});
+router.get("/:id", getProduct);
+router.post("/", createProduct);
+router.put("/:id", updateProduct);
 
 export default router;
