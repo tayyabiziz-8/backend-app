@@ -1,0 +1,114 @@
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Environment variables
+!.env.example
+.env
+scripts/.migrate-env
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Local data exports (business description review packs, etc.)
+exports/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+.cache/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional REPL history
+.node_repl_history
+
+# Output of 'npm pack'
+*.tgz
+
+# Yarn
+.yarn-integrity
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+.pnp.*
+
+# TypeScript
+*.tsbuildinfo
+
+# Misc
+.serverless/
+.webpack/
+.dynamodb/
+.tern-port
+.vscode-test
+
+# Database
+*.sqlite
+*.db
+
+# Legacy SQL dumps and DB backups (too large for GitHub)
+_dump_ilborghista_*.sql
+*.dump
+pre_borghi_import_*.dump
+
+# Generated parser output (send to client for review, don't commit)
+test_batch_borghi.json
+TEST_BATCH_REVIEW.md
+test_batch_preview.html
+borghi_full_stats.json
+
+
+config.bat
+
+# Python bytecode cache
+__pycache__/
+*.pyc
+
+# Local Python env for scripts (psycopg2, etc.)
+.venv/
