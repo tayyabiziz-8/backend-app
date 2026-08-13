@@ -9,7 +9,9 @@ module.exports = {
     );
     const categoryId = categories.length ? categories[0].id : null;
 
-    await queryInterface.bulkInsert("Products", [
+    await queryInterface.bulkInsert(
+      "Products",
+      [
       {
         name: "Wireless Mouse",
         slug: "wireless-mouse",
@@ -71,7 +73,7 @@ module.exports = {
         created_at: new Date(),
         updated_at: new Date(),
       },
-    ]);
+    ], { ignoreDuplicates: true });
   },
 
   async down(queryInterface, Sequelize) {

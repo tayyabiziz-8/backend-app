@@ -145,7 +145,10 @@ export const loginUser = async ({ email, password }) => {
     if (transaction && !transaction.finished) {
       try {
         await transaction.rollback();
-      } catch (rollbackError) { }
+      } catch (rollbackError) {
+
+        console.log(`Error occured while rollback: ${rollbackError}`);
+      }
     }
     throw error;
   }
