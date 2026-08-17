@@ -146,7 +146,6 @@ export const loginUser = async ({ email, password }) => {
       try {
         await transaction.rollback();
       } catch (rollbackError) {
-
         console.log(`Error occured while rollback: ${rollbackError}`);
       }
     }
@@ -177,6 +176,9 @@ export const changePasswordService = async ({
   }
   if (newPassword !== confirmPassword) {
     throw new ApiError(400, "New password and confirm password do not match");
+  }
+  if (newPassword === oldPassword) {
+    throw new ApiError(400, "New password and old password are same");
   }
   if (newPassword.length < 6) {
     throw new ApiError(400, "New password must be at least 6 characters");
