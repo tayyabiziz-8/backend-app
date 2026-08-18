@@ -11,7 +11,8 @@ export const authenticate = asyncHandler(async (req, _res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.user = decoded;
     next();
-  }catch(err){
+  }
+  catch(err){
     throw new ApiError(401, err.name === "TokenExpiredError" ? "Token expired. Please log in again." : "Token invalid. Please log in again.");
   }
 });
