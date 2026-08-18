@@ -6,7 +6,7 @@ import {
   User,
   UserAuthToken,
 } from "../models/index.js";
-import { ApiError } from "../util/ApiError.js";
+import { ApiError } from "../utils/ApiError.js";
 
 // Helpers
 const generateAuthToken = (payload, expiresIn = "40d") =>
