@@ -6,7 +6,6 @@ import { authenticate } from "./src/middlewares/auth.middleware.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 app.use(express.json());
 
 app.get("/", (req, res)=>{
@@ -20,6 +19,6 @@ app.listen(PORT, (err) => {
     if (err) {
         console.error("Error starting the server:", err);
     } else {
-        console.log(`Backend server is running on PORT ${PORT}`);
+        console.log(`Backend server is running on PORT: ${PORT}`);
     }
 });

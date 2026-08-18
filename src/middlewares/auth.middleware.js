@@ -7,7 +7,6 @@ export const authenticate = asyncHandler(async (req, _res, next) => {
   if (!token) {
     throw new ApiError(401, "Unauthorized: No token provided");
   }
-
   try{
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     req.user = decoded;

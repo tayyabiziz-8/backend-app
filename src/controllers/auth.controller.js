@@ -12,7 +12,6 @@ export const register = asyncHandler(async(req, res)=>{
         password,
         role
     } = req.body;
-
     if(!firstName || !lastName || !email || !password) {
         throw new ApiError(400, "Please provide all required fields");
     }
@@ -21,4 +20,4 @@ export const register = asyncHandler(async(req, res)=>{
     return res
         .status(201)
         .json(new ApiResponse(201, data, "User registered successfully"));
-})
+}) 
