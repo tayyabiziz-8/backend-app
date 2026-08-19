@@ -81,6 +81,7 @@ src/
 index.js
 .sequelizerc
 .env
+```
 
 ### run
 
