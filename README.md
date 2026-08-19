@@ -10,6 +10,9 @@
 
 ## Structure
 
+# Project Structure
+
+```text
 src/
 ├── config/
 │   └── config.cjs
