@@ -30,7 +30,7 @@ app.use("/orders", orderRoute);
 
 app.listen(PORT, (err) => {
     if (err) {
-        console.error("Error starting the server:", err);
+        console.error("Error starting the server: ", err);
     } else {
         console.log(`Backend server is running on PORT: ${PORT}`);
     }
