@@ -34,6 +34,15 @@ export default (
         type: DataTypesInstance.STRING,
         allowNull: true,
       },
+      role: {
+        type: DataTypesInstance.ENUM("user", "admin"),
+        allowNull: false,
+        defaultValue: "user",
+      },
+      profilePicture: {
+        type: DataTypesInstance.STRING,
+        allowNull: true,
+      }
     },
     {
       tableName: "Users",

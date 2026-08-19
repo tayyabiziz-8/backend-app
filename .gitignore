@@ -112,3 +112,5 @@ __pycache__/
 
 # Local Python env for scripts (psycopg2, etc.)
 .venv/
+
+public

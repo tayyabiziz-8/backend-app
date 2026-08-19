@@ -5,6 +5,7 @@ import {
     loginUser,
     logoutUser,
     changePasswordService,
+    updateUserProfilePicture,
     getCurrentUser as getCurrentUserService,
 } from '../services/auth.service.js';
 import { ApiResponse } from '../utils/ApiResponse.js';
@@ -76,3 +77,15 @@ export const getCurrentUser = asyncHandler(async (req, res) => {
         .status(200)
         .json(new ApiResponse(200, data, "Current user fetched successfully"));
 });
+
+export const addProfilePicture = asyncHandler(async(req, res)=>{
+    const userId = req.params.id;
+    if(!req.file) {
+        throw new ApiError(400, "Please upload a profile picture");
+    }
+    const profilePicturePath = req.file.path; // Get the path of the uploaded file
+    const data = await updateUserProfilePicture(userId, profilePicturePath);
+    return res
+        .status(200)
+        .json(new ApiResponse(200, data, "Profile picture updated successfully"));
+})
