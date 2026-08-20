@@ -16,12 +16,10 @@ const findOrCreateCart = async (userId) => {
   });
   return cart;
 };
-
 export const getCart = async (userId) => {
   const cart = await findOrCreateCart(userId);
   return Cart.findByPk(cart.id, { include: cartInclude });
 };
-
 export const addItemToCart = async (userId, { productId, quantity = 1 }) => {
   if (!productId) {
     throw new ApiError(400, "productId is required");
@@ -29,7 +27,6 @@ export const addItemToCart = async (userId, { productId, quantity = 1 }) => {
   if (quantity < 1) {
     throw new ApiError(400, "Quantity must be at least 1");
   }
-
   const product = await Product.findByPk(productId);
   if (!product || !product.isActive) {
     throw new ApiError(404, "Product not found");
@@ -37,13 +34,10 @@ export const addItemToCart = async (userId, { productId, quantity = 1 }) => {
   if (product.stock < quantity) {
     throw new ApiError(400, "Not enough stock available");
   }
-
   const cart = await findOrCreateCart(userId);
-
   const existingItem = await CartItem.findOne({
     where: { cartId: cart.id, productId },
   });
-
   if (existingItem) {
     const newQuantity = existingItem.quantity + quantity;
     if (product.stock < newQuantity) {
@@ -54,7 +48,6 @@ export const addItemToCart = async (userId, { productId, quantity = 1 }) => {
   } else {
     await CartItem.create({ cartId: cart.id, productId, quantity });
   }
-
   return Cart.findByPk(cart.id, { include: cartInclude });
 };
 
@@ -74,7 +67,6 @@ export const updateCartItem = async (userId, itemId, { quantity }) => {
   if (item.product.stock < quantity) {
     throw new ApiError(400, "Not enough stock available");
   }
-
   item.quantity = quantity;
   await item.save();
 

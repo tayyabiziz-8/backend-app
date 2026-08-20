@@ -35,20 +35,17 @@ export const createCategory = async ({ name, description, image, parentId }) => 
   if (!name) {
     throw new ApiError(400, "Category name is required");
   }
-
   const slug = slugify(name);
   const existing = await Category.findOne({ where: { slug } });
   if (existing) {
     throw new ApiError(400, "A category with this name already exists");
   }
-
   if (parentId) {
     const parent = await Category.findByPk(parentId);
     if (!parent) {
       throw new ApiError(400, "Parent category not found");
     }
   }
-
   return Category.create({
     name,
     slug,
@@ -63,7 +60,6 @@ export const updateCategory = async (id, { name, description, image, parentId, i
   if (!category) {
     throw new ApiError(404, "Category not found");
   }
-
   if (name && name !== category.name) {
     const slug = slugify(name);
     const existing = await Category.findOne({ where: { slug } });
@@ -73,7 +69,6 @@ export const updateCategory = async (id, { name, description, image, parentId, i
     category.name = name;
     category.slug = slug;
   }
-
   if (description !== undefined) category.description = description;
   if (image !== undefined) category.image = image;
   if (isActive !== undefined) category.isActive = isActive;
@@ -83,7 +78,6 @@ export const updateCategory = async (id, { name, description, image, parentId, i
     }
     category.parentId = parentId || null;
   }
-
   await category.save();
   return category;
 };

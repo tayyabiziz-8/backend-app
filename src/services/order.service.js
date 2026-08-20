@@ -20,12 +20,10 @@ export const createOrder = async (userId, { shippingAddress, paymentMethod }) =>
   if (!shippingAddress) {
     throw new ApiError(400, "Shipping address is required");
   }
-
   const cart = await Cart.findOne({
     where: { userId },
     include: [{ model: CartItem, as: "items", include: [{ model: Product, as: "product" }] }],
   });
-
   if (!cart || !cart.items || cart.items.length === 0) {
     throw new ApiError(400, "Your cart is empty");
   }
@@ -39,12 +37,10 @@ export const createOrder = async (userId, { shippingAddress, paymentMethod }) =>
       throw new ApiError(400, `Not enough stock for ${item.product.name}`);
     }
   }
-
   const totalAmount = cart.items.reduce((sum, item) => {
     const unitPrice = item.product.discountPrice ?? item.product.price;
     return sum + Number(unitPrice) * item.quantity;
   }, 0);
-
   const transaction = await sequelize.transaction();
   let orderId;
   try {
@@ -74,16 +70,13 @@ export const createOrder = async (userId, { shippingAddress, paymentMethod }) =>
 
       await item.product.decrement("stock", { by: item.quantity, transaction });
     }
-
     await CartItem.destroy({ where: { cartId: cart.id }, transaction });
-
     orderId = order.id;
     await transaction.commit();
   } catch (error) {
     await transaction.rollback();
     throw error;
   }
-
   return Order.findByPk(orderId, { include: orderInclude });
 };
 
@@ -112,12 +105,10 @@ export const updateOrderStatus = async (orderId, status) => {
   if (!VALID_STATUSES.includes(status)) {
     throw new ApiError(400, `Status must be one of: ${VALID_STATUSES.join(", ")}`);
   }
-
   const order = await Order.findByPk(orderId);
   if (!order) {
     throw new ApiError(404, "Order not found");
   }
-
   order.status = status;
   await order.save();
   return order;

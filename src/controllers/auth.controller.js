@@ -22,7 +22,6 @@ export const register = asyncHandler(async (req, res) => {
     if (!firstName || !lastName || !email || !password) {
         throw new ApiError(400, "Please provide all required fields");
     }
-
     const data = await registerUser({ firstName, lastName, email, phone, password, role });
     return res
         .status(201)
@@ -34,7 +33,6 @@ export const login = asyncHandler(async (req, res) => {
     if (!email || !password) {
         throw new ApiError(400, "Please provide email and password");
     }
-
     const data = await loginUser({ email, password });
     return res
         .status(200)
@@ -46,7 +44,6 @@ export const logout = asyncHandler(async (req, res) => {
     if (!token) {
         throw new ApiError(400, "No token provided");
     }
-
     await logoutUser(token);
     return res
         .status(200)
@@ -56,14 +53,12 @@ export const logout = asyncHandler(async (req, res) => {
 export const changePassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword, confirmPassword } = req.body;
     const { id } = req.user;
-
     const data = await changePasswordService({
         id,
         oldPassword,
         newPassword,
         confirmPassword,
     });
-
     return res
         .status(200)
         .json(new ApiResponse(200, data, "Password changed successfully"));
@@ -71,7 +66,6 @@ export const changePassword = asyncHandler(async (req, res) => {
 
 export const getCurrentUser = asyncHandler(async (req, res) => {
     const { id } = req.user;
-
     const data = await getCurrentUserService(id);
     return res
         .status(200)

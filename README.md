@@ -10,8 +10,6 @@
 
 ## Structure
 
-# Project Structure
-
 ```text
 src/
 ├── config/

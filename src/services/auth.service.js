@@ -201,11 +201,9 @@ export const changePasswordService = async ({
 // Get current user's updated data (for /me endpoint)
 export const getCurrentUser = async (userId) => {
   const user = await User.findByPk(userId);
-
   if (!user) {
     throw new ApiError(404, "User not found");
   }
-
   return {
     user: {
       ...sanitizeUser(user),
@@ -214,14 +212,11 @@ export const getCurrentUser = async (userId) => {
 };
 export const updateUserProfilePicture = async (userId, profilePicturePath) => {
   const user = await User.findByPk(userId);
-
   if (!user) {
     throw new ApiError(404, "User not found");
   }
-
   user.profilePicture = profilePicturePath;
   await user.save();
-
   return {
     user: {
       ...sanitizeUser(user),

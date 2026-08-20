@@ -130,7 +130,6 @@ export const updateProduct = async (id, updates) => {
     }
     product.categoryId = categoryId || null;
   }
-
   await product.save();
   return product;
 };
