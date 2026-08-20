@@ -1,4 +1,4 @@
-# E-Commerce App Backend setup
+# E-Commerce App Backend
 
 ## Dependencies
 
