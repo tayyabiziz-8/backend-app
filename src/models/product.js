@@ -109,6 +109,9 @@ export default (
         as: "orderItems",
       });
     }
+    if (models.Review) {
+      Product.hasMany(models.Review, { foreignKey: "productId", as: "reviews" });
+    }
   };
   return Product;
 };

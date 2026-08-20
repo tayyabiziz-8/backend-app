@@ -12,6 +12,7 @@ import CartItemFactory from "./cart_item.js";
 import WishlistFactory from "./wishlist.js";
 import OrderFactory from "./order.js";
 import OrderItemFactory from "./order_item.js";
+import ReviewFactory from "./review.js";
 
 /**
  * Single shared Sequelize instance. Exported eagerly so any model file that
@@ -44,6 +45,7 @@ const CartItem = CartItemFactory(sequelize, Sequelize);
 const Wishlist = WishlistFactory(sequelize, Sequelize);
 const Order = OrderFactory(sequelize, Sequelize);
 const OrderItem = OrderItemFactory(sequelize, Sequelize);
+const Review = ReviewFactory(sequelize, Sequelize);
 
 const db = {
   User,
@@ -55,6 +57,7 @@ const db = {
   Wishlist,
   Order,
   OrderItem,
+  Review,
 };
 
 /**
@@ -81,4 +84,5 @@ export {
   Wishlist,
   Order,
   OrderItem,
+  Review,
 };

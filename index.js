@@ -6,6 +6,7 @@ import categoryRoute from "./src/routes/category.route.js";
 import cartRoute from "./src/routes/cart.route.js";
 import wishlistRoute from "./src/routes/wishlist.route.js";
 import orderRoute from "./src/routes/order.route.js";
+import reviewRoute from "./src/routes/review.route.js";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -27,6 +28,7 @@ app.use("/categories", categoryRoute);
 app.use("/cart", cartRoute);
 app.use("/wishlist", wishlistRoute);
 app.use("/orders", orderRoute);
+app.use("/reviews", reviewRoute);
 
 app.listen(PORT, (err) => {
     if (err) {
